@@ -21,14 +21,17 @@ const imageUrls = [
     "/tile8.png"
 ];
 
+const images: HTMLImageElement[] = [];
+
+imageUrls.forEach(url => {
+    let img = new Image();
+    img.src = url
+    images.push(img)
+});
 
 //defining the size of the main grid
 const numTiles = 32;
 const tileSize = gridCanvas.width / numTiles;
-
-// class TileMap {
-//     tiles: string[];
-// }
 
 //defining the size of the select grid
 const numSelectables = imageUrls.length;
@@ -40,8 +43,7 @@ let tilemap: HTMLImageElement[][] = new Array(numTiles);
 for(let i = 0; i < numTiles; i++) {
     let row = new Array(numTiles);
     for (let j = 0; j < numTiles; j++) {
-        row[j] = new Image();
-        row[j].src = "/tile1.png";
+        row[j] = images[0];
     }
     tilemap[i] = row;
 }
@@ -52,7 +54,6 @@ let currentTile = "/tile1.png";
 //draw the initial canvases
 redrawTilemap();
 drawSelectCanvas();
-
 
 //Function that draws a texture to a specific canvas ctx
 function drawTexture(row: number, col: number, ctx: CanvasRenderingContext2D, image: HTMLImageElement, width: number, height: number, cellSize: number) {
@@ -91,8 +92,7 @@ gridCanvas.addEventListener("click", (e) => {
 function drawSelectCanvas()
 {
     for (let i = 0; i < numSelectables; i++) {
-        const selectableImage = new Image();
-        selectableImage.src = imageUrls[i];
+        const selectableImage = images[i]
         drawTexture(0, i, selectCtx, selectableImage, selectCanvas.width, selectHeight, 64);
     }
 }
