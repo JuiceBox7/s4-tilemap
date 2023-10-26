@@ -26,12 +26,13 @@ const imageUrls = [
 const numTiles = 32;
 const tileSize = gridCanvas.width / numTiles;
 
+// class TileMap {
+//     tiles: string[];
+// }
 
 //defining the size of the select grid
 const numSelectables = imageUrls.length;
 const selectHeight = selectCanvas.height / numSelectables;
-
-
 
 //creating the tilemap nested array
 let tilemap: HTMLImageElement[][] = new Array(numTiles);
